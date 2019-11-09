@@ -12,12 +12,10 @@ const sequelize = new Sequelize('fitafitblog','root','', {
 
 const data = [
     {
-        id: 1,
         title: 'Novo post',
         content: 'Olá abigos, my the primeiro first post'        
     },
-    {
-        id: 2,
+    {    
         title: 'Outro post',
         content: 'Oiiiiiiin gente'
     }
@@ -60,14 +58,24 @@ server.route({
     path: '/posts/{id}',
     handler: async(request, h) => {
         const { id } = request.params;
-        const post =  data.find(post => post.id === +id );
-        return post || JSON.stringify('Erro') ;
+        return await Post.findByPk(id);
+      //  const post =  data.find(post => post.id === +id );
+      //  return post || JSON.stringify('Erro') ;
     }
 });
 
 //inserir o sync de tabelas antes do server.start()
 //...
-await sequelize.sync()
+
+
+try{
+ await sequelize.sync();
+ Post.bulkCreate(data);
+}catch(error){
+     throw new Error(error);
+ }
+
+
 await sequelize.start();
 
 await server.start();
