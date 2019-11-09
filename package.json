@@ -25,7 +25,9 @@
   },
   "homepage": "https://github.com/carlosalgart/fitafitblog#readme",
   "dependencies": {
-    "@hapi/hapi": "^18.4.0"
+    "@hapi/hapi": "^18.4.0",
+    "mysql2": "^2.0.0",
+    "sequelize": "^5.21.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"
