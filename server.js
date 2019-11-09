@@ -1,3 +1,5 @@
+
+
 const Hapi = require('@hapi/hapi');
 
 const {Sequelize, Model, DataTypes }  =require('sequelize');
@@ -5,7 +7,9 @@ const {Sequelize, Model, DataTypes }  =require('sequelize');
 const sequelize = new Sequelize('fitafitblog','root','', {
     dialect: 'mysql',
     port: 3307
-});//
+});
+const { CREATED } =  require('http-status');
+
 
 
 
@@ -37,6 +41,9 @@ title: DataTypes.STRING,
 content: DataTypes.TEXT
 }, {sequelize, modelName: 'post'})
 
+
+
+
 server.route({
     method: 'GET',
     path: '/',
@@ -49,7 +56,7 @@ server.route({
     method: 'GET',
     path: '/posts',
     handler: async(request, h) => {
-        return data;
+        return await Post.findAll();
     }
 });
 
@@ -63,7 +70,15 @@ server.route({
       //  return post || JSON.stringify('Erro') ;
     }
 });
-
+server.route({
+    method: 'POST',
+    path: '/posts',
+    handler: async(request, h) => {
+        const {payload} = request;
+        const post = await Post.create(payload);
+        return h.response(post).code(CREATED);
+    }
+});
 //inserir o sync de tabelas antes do server.start()
 //...
 
@@ -76,7 +91,7 @@ try{
  }
 
 
-await sequelize.start();
+//await sequelize.start();
 
 await server.start();
 console.log('Server running on %s', server.info.uri);
