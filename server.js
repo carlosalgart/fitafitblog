@@ -1,5 +1,14 @@
 const Hapi = require('@hapi/hapi');
 
+const {Sequelize, Model, DataTypes }  =require('sequelize');
+
+const sequelize = new Sequelize('fitafitblog','root','', {
+    dialect: 'mysql'
+});
+
+
+
+
 const data = [
     {
         id: 1,
@@ -48,7 +57,10 @@ server.route({
     }
 });
 
-
+//inserir o sync de tabelas antes do server.start()
+//...
+await sequelize.sync()
+await sequelize.start();
 
 await server.start();
 console.log('Server running on %s', server.info.uri);
