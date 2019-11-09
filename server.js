@@ -38,6 +38,18 @@ server.route({
     }
 });
 
+server.route({
+    method: 'GET',
+    path: '/posts/{id}',
+    handler: async(request, h) => {
+        const { id } = request.params;
+        const post =  data.find(post => post.id == id );
+        return post || {};
+    }
+});
+
+
+
 await server.start();
 console.log('Server running on %s', server.info.uri);
 
