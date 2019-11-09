@@ -1,5 +1,21 @@
 const Hapi = require('@hapi/hapi');
 
+const data = [
+    {
+        id: 1,
+        title: 'Novo post',
+        content: 'Olá abigos, my the primeiro first post'        
+    },
+    {
+        id: 2,
+        title: 'Outro post',
+        content: 'Oiiiiiiin gente'
+    }
+];
+
+
+
+
 const init = async() => {
    const server = Hapi.server({
     port:3000,
@@ -11,6 +27,14 @@ server.route({
     path: '/',
     handler: async(request, h) => {
         return 'Hello hapi';
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/posts',
+    handler: async(request, h) => {
+        return data;
     }
 });
 
