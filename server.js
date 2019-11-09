@@ -1,10 +1,11 @@
 const Hapi = require('@hapi/hapi');
 
 const {Sequelize, Model, DataTypes }  =require('sequelize');
-
+//const sequelize = new Sequelize('sqlite.blog.sqlite');
 const sequelize = new Sequelize('fitafitblog','root','', {
-    dialect: 'mysql'
-});
+    dialect: 'mysql',
+    port: 3307
+});//
 
 
 
@@ -30,6 +31,13 @@ const init = async() => {
     port:3000,
     host: 'localhost'
 });
+
+
+class Post extends Model{}
+Post.init({
+title: DataTypes.STRING,
+content: DataTypes.TEXT
+}, {sequelize, modelName: 'post'})
 
 server.route({
     method: 'GET',
