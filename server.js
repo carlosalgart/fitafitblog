@@ -43,8 +43,8 @@ server.route({
     path: '/posts/{id}',
     handler: async(request, h) => {
         const { id } = request.params;
-        const post =  data.find(post => post.id == id );
-        return post || {};
+        const post =  data.find(post => post.id === +id );
+        return post || JSON.stringify('Erro') ;
     }
 });
 
