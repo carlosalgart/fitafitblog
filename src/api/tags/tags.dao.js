@@ -1,36 +1,28 @@
-import { instances } from 'hapi-sequelizejs'
+import { instances } from 'hapi-sequelizejs';
+import PostsDAO from '../posts/posts.dao';
 
 const Tag = instances.getModel('Tag');
 
 export default class TagsDAO{
    findAll(){
-       return Tag.findAll();
+        return Tag.findAll({where});
    }
 
    findById(id){
-        return Tag.findOne({where: {postId: idPost, id: idTag}});
+        return Tag.findOne({where});
    }
 
-   async create(idPost, tag) {
-    const post = await PostsDAO.findById(idPost);
-    
-    if (! post) {
-        return {}
+   create( tag) {
+       return Tag.create(tag);
     }
 
-    const tagNew = await Tag.create(tag);
-    tagNew.setPost(post);
-
-    return tagNew;
-    }
-
-   async update(id, tag){
-       await Tag.update(tag, {where: {id}});
-       return await this.findById(id);
+   async update(params, payload){
+       await Tag.update(payload, {where: {params}});
+       return await this.findById(params.id);
    }
 
-   destroy(id){
-       return Tag.destroy({where: {id}});
+   destroy(params){
+       return Tag.destroy({where: {params}});
    }
 
 }

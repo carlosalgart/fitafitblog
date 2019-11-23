@@ -6,6 +6,8 @@ export default (sequelize, dataTypes) => {
             name: dataTypes.STRING,  
             postId: dataTypes.INTEGER        
     }, {sequelize, modelName: 'Tag'});
-
+    Tag.associate = models => {
+        models.Tag.belongsTo(models.Post, { as: 'post' });
+    };
     return Tag;
 };
