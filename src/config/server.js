@@ -40,15 +40,17 @@ const init = async() => {
 server.register({
     plugin: require('hapi-router'),
     options: { 
-            routes: 'src/api/**/**.routes.js'
+            routes: 'src/api/**/**.routes.js',
+            controllers: 'src/api/**/**.controllers.js',
+            models: 'src/api/**/**.models.js'
          }
 });
 
-class Post extends Model{}
-Post.init({
-title: DataTypes.STRING,
-content: DataTypes.TEXT
-}, {sequelize, modelName: 'post'})
+// class Post extends Model{}
+// Post.init({
+// title: DataTypes.STRING,
+// content: DataTypes.TEXT
+// }, {sequelize, modelName: 'post'})
 
 
 
