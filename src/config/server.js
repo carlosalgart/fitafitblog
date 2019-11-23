@@ -3,7 +3,7 @@ console.log('src/config/server.js');
 
 import Hapi from '@hapi/hapi';
 import {Sequelize, Model, DataTypes }  from 'sequelize';
-import { CREATED, OK, NO_CONTENT } from 'http-status';
+
 
 //const sequelize = new Sequelize('sqlite.blog.sqlite');
 const sequelize = new Sequelize('fitafitblog','root','', {

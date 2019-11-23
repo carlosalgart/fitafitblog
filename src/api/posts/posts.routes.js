@@ -1,10 +1,29 @@
-import {list} from "./posts.controllers";
+import {list, create, detail, update, destroy} from "./posts.controllers";
 
 export default [{
     method: 'GET',
     path: '/posts',
     handler: list
-} ]
+},
+{
+    method: 'POST',
+    path: '/posts',
+    handler: create    
+},
+{
+    method: 'GET',
+    path: '/posts/{id}',
+    handler: detail    
+},
+  {  method: 'PUT',
+    path: '/posts/{id}',
+    handler: update
+  }  ,
+  {  method: 'DELETE',
+    path: '/posts/{id}',
+    handler: destroy
+  }
+];
 
 
 
