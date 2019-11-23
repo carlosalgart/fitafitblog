@@ -1,0 +1,11 @@
+//commonjs
+exports.variable = 'Hello';
+module.export = 'example';
+
+//es module
+export const variable = 'Hello world';
+export const a  = 1;
+export const b = 2;
+ 
+import{...} from '.module.js';
+
