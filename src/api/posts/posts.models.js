@@ -5,7 +5,7 @@ export default (sequelize, dataTypes) => {
     Post.init({
     title: dataTypes.STRING,
     content: dataTypes.TEXT
-    }, {sequelize, modelName: 'post'})
+    }, {sequelize, modelName: 'Post'})
 
     return Post;
 };
