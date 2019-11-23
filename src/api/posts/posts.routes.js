@@ -1,4 +1,5 @@
-import {list, create, detail, update, destroy} from "./posts.controllers";
+import {list, create, detail, update, destroy} from './posts.controllers';
+import * as Schemas from './posts.schemas';
 
 export default [{
     method: 'GET',
@@ -8,20 +9,39 @@ export default [{
 {
     method: 'POST',
     path: '/posts',
-    handler: create    
+    handler: create     ,  
+        config: {
+            validate: {
+                payload: Schemas.payload
+            }
+        }
 },
 {
     method: 'GET',
     path: '/posts/{id}',
-    handler: detail    
+    handler: detail  ,  
+        config: {
+            validate: {
+                params: Schemas.detail
+            }
+        }
 },
   {  method: 'PUT',
     path: '/posts/{id}',
-    handler: update
-  }  ,
+    handler: update    ,  
+        config: {
+            validate: Schemas.update
+            }
+        
+  },
   {  method: 'DELETE',
     path: '/posts/{id}',
-    handler: destroy
+    handler: destroy,
+    config: {
+            validate: { 
+                params: Schemas.params
+            }
+            }
   }
 ];
 
