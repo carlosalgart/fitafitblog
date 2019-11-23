@@ -37,14 +37,30 @@ const init = async() => {
     host: 'localhost'
 });
 
-server.register({
+await server.register([
+    {
+        plugin: require('hapi-sequelizejs'),
+        options: [
+            {
+                name: 'fitafitblog',
+                models: ['src/api/**/**models.js'],
+                sequelize,
+                sync: true
+            }
+
+        ]
+    },
+
+    {
     plugin: require('hapi-router'),
     options: { 
             routes: 'src/api/**/**.routes.js',
-            controllers: 'src/api/**/**.controllers.js',
-            models: 'src/api/**/**.models.js'
+            controllers: 'src/api/**/**.controllers.js'
          }
-});
+       
+}]);
+
+
 
 // class Post extends Model{}
 // Post.init({
@@ -62,7 +78,7 @@ server.register({
 
 try{
  await sequelize.sync();
- Post.bulkCreate(data);
+ //Post.bulkCreate(data);
 }catch(error){
      throw new Error(error);
  }

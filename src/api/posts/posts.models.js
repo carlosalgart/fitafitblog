@@ -1,5 +1,11 @@
-class Post extends Model{}
-Post.init({
-title: DataTypes.STRING,
-content: DataTypes.TEXT
-}, {sequelize, modelName: 'post'})
+import { Model } from 'sequelize';
+
+export default (sequelize, dataTypes) => {
+    class Post extends Model{}
+    Post.init({
+    title: dataTypes.STRING,
+    content: dataTypes.TEXT
+    }, {sequelize, modelName: 'post'})
+
+    return Post;
+};

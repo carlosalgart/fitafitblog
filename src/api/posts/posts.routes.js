@@ -1,8 +1,11 @@
+import {list} from "./posts.controllers";
+
 export default [{
     method: 'GET',
     path: '/posts',
-    handler: async(request, h) => 'Posts List'
+    handler: list
 } ]
+
 
 
 // server.route({
