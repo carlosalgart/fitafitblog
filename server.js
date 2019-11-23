@@ -94,7 +94,7 @@ server.route({
 });
 
 server.route({
-    method: 'DELETE',
+    method: 'DELETE', 
     path: '/posts/{id}',
     handler: async(request, h) => {
         const { id } = request.params;   
